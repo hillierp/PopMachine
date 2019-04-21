@@ -24,7 +24,7 @@ Alexa controls have also been added, which requires an Alexa skill to be created
     - DO NOT charge ahead and think 'sudo apt-get install' is your friend here. You will get an outdated version and nothing will work (yes, we learned the hard way)
     - Follow this: https://www.instructables.com/id/Install-Nodejs-and-Npm-on-Raspberry-Pi/
     - For our PI3 (referenced above in the Amazon link), we required node-v10.15.3-linux-armv7l.tar.xz
-    - Note that the .tx file can be extracted by running  tar -xf node-v10.15.3-linux-armv7l.tar.xz    This was not explained on the instrucables page.
+    - Note that the .tx file can be extracted by running  tar -xf node-v10.15.3-linux-armv7l.tar.xz    This was not explained on the instructables page.
     - reboot
     - Check node and npm version. For our solution, node version was 10.15.3 and npm was 6.4.1
 

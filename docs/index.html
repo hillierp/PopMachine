@@ -1,22 +1,266 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-138669700-1"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
 
-  <head>
-    <meta charset='utf-8' />
-    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
-    <meta name="description" content="Home Page : My Github Web" />
-    <title>Home Page</title>
-  </head>
+    gtag('config', 'UA-138669700-1');
+    </script>
 
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-6232039173722231",
+        enable_page_level_ads: true
+    });
+    </script>
 
-    <!-- FOOTER -->
-    <div id="footer_wrap" class="outer">
-    <footer class="inner">
-        <h2><font color="#FFFFFF">Profiles</font></h2>
-        <p>
-            <a href="http://www.github.com/hillierp">Github</a><br />
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <title>FAST Hacks</title>
+    <meta name="description" content="Father and Son Tech Hack 1 - IOT Pop Machine">
+
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/colorbox.css" />
+</head>
+<style>
+    * {
+      box-sizing: border-box;
+    }
+    
+    body {
+      margin: 0;
+      font-family: Arial;
+    }
+    
+    .header {
+      text-align: center;
+      padding: 32px;
+    }
+    
+    /* Create two equal columns that floats next to each other */
+    .column {
+      float: left;
+      width: 50%;
+      padding: 10px;
+    }
+    
+    .column img {
+      margin-top: 12px;
+    }
+    
+    /* Clear floats after the columns */
+    .row:after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+</style>
+
+<body>
+  <div id="container">
+    <header>
+      <h1>FAST Hacks - IoT Pop Machine</h1>
+      <h5>Connecting a vintage Vendo Vending Machine to Twilio and Alexa</h5>
+    </header>
+
+    <div id="main" role="main">
+      <p>FAST (Father and Son Team) Hacks are our way of spending time together and learning new skills. In this hack, Peter (father) and Xander(son) are connecting a vintage
+          pop machine to the internet. Why? Because pop machines are cool, and so is the internet.</p>
+      <p>We are not the first to own a personal pop machine, nor are we the first to fill a pop machine with various other beverages. But we could very well be the first to
+          say 'Alexa, get me a beer from the pop machine'.</p>
+      <img src="img/fast-hacks.jpg" width="100%">
+
+      <h2>Hardware</h2>
+
+      <h3 id="hack-required-equipment">Required Equipment</h3>
+
+      <div class="row">
+        <div class="column">
+          <img src="img/popmachine.jpg" width="350" height="450" >
+        </div>
+        <div class="column" >
+            <img src="img/manufacturer-stamp.jpg" width="350" height="215">
+            <img src="img/wiring-diagram.jpg" width="350" height="215">
+        </div>
+      </div>
+
+      <p>We found our pop machine for sale on Kijiji. It was still being used in the back of an old garage, and required a good cleaning to get the dust and grease off. The machine will have
+          a manufacturer stamp that contains a sales model that you can Google to obtain information. We were not so lucky with this particular model, but the wiring diagrams contained
+          inside the machine were still in readable condition.</p>
+
+      <p>We chose to use a Raspberry Pi 3 that will run a server we can communicate with, and a Kuman K30 5V 8 Channel Relay Shield Module to activate the coin credit mechanism and simulate
+         pop selectoins. These relays can be triggered by the 3.3v GPIO pins on the Pi - some models we tried required 5v. Both products we used can be found on Amazon:</p>
+      <a href="https://www.amazon.ca/gp/product/B07GC9WH8Z/ref=ppx_yo_dt_b_asin_title_o05_s00?ie=UTF8&psc=1"> Raspberry Pi 3</a>
+      <p></p>
+      <a href="https://www.amazon.ca/gp/product/B01BY1693A/ref=ppx_yo_dt_b_asin_title_o07_s00?ie=UTF8&psc=1"> Kuman 8 Channel Relay Module</a>
+
+      <div class="row">
+        <div class="column">
+            <img src="img/components.jpg" width="350" height="450" >
+        </div>
+        <div class="column" >
+            <img src="img/relay.jpg" width="350" height="215">
+            <img src="img/connectors.jpg" width="350" height="215">
+        </div>
+      </div>
+
+      <p>A good set of crimpers is a must, as are wire strippers, and at least 3 different colors of 16 gauge wire. The Hilitand connectors are a real time saver, and you will need many of
+         the 3-Way types, as well as both female and male Quick Connectors (the blue things attached to the yellow wire in the picture above), and female to female Dupont connectors to connect
+         the Pi GPIO (General Purpose Input/Output) pins to the Relay Module pins.</p>
+
+      <a href="https://www.amazon.ca/gp/product/B07CG6CHK9/ref=ppx_yo_dt_b_asin_title_o01_s00?ie=UTF8&psc=1">Hilitand Reusable Spring Lever Terminal Block Connector</a>
+      <p></p>
+      <a href="https://www.amazon.ca/gp/product/B01EV70C78/ref=ppx_yo_dt_b_asin_title_o07_s00?ie=UTF8&psc=1">Dupont Connectors</a>
+      
+
+      <h3 id="hack-power-tap">Power Tap</h3>
+      <p>When you first open the door on our pop machine, you are greeted with the coin mechanism. There is a small clip to undo, and this swings open to reveal the selector switches behind.
+         The Jones Plug wired to the coin mechanism connects to the pop machine power feed, as well as the selector switches. This is the primary interface that we will tie into. </p>
+
+      <div class="row">
+        <div class="column">
+            <img src="img/coinco.jpg" width="350" height="450" >
+        </div>
+        <div class="column" >
+            <img src="img/selectors.jpg" width="350" height="450" >
+        </div>
+     </div>
+    
+ 
+        <p>We quickly located the model number of the coin mechanism (a Coinco 9300-S) and within a few minutes Xander had found a full operations manual and wiring schematic. We removed the
+            female receptacle for the Jones Plug, and this is where we will make the first incision. Make sure Power is Off!</p>
+        <div class="row">
+            <div class="column">
+                <img src="img/coinco-jones-plug.png" width="350" height="450" >
+            </div>
+            <div class="column" >
+                <img src="img/jones-receptacle.jpg" width="350" height="450" >
+            </div>
+        </div>
+           
+        <p>After removing the female end of the Jones Plug from its housing, you can see which wires correspond to which pins in the wiring diagram. To power the Raspberry Pi, we will
+            splice into the wires connecting to Pin 1 (VAC HOT) and Pin 2 (VAC NEUTRAL), which are the black and red wires respectively. After cutting the
+            black wire, we used the 3-Way Hilitand connectors to rejoin the black wire, then repeated the procedure on the red wire. This restored the power to the coin mechanism, but
+            allowed us to connect a power plug receptacle using the 3rd slots in the Hilitand connectors. Using the power adpater provided with the Raspberry PI, you can plug it into this
+            receptacle and the adapter will insure that 5V power is provided to the Pi.</p>
+        <img src="img/black-wire.jpg" width="200" height="250" >
+        <img src="img/red-wire.jpg" width="200" height="250" >
+        <img src="img/plug.jpg" width="150" height="250" >
+
+        <h3 id="hack-coin-operation">Coin Bypass</h3>
+
+        <p>The coin mechansim is designed to collect coins and dispense change. Once the required credit is reached, the logic board activates the vend relay for 250ms, and now the
+           selector switches can be used to select a beverage. There are a number of options to bypass this mechanism. Xander wanted the machine to continue to function normally
+           for manual operation, so this required that we splice into the existing circuitry, not overlay a new one. So rather than connecting Pin 3 to Pin 7 and calling it done,
+           we elected to wire these up to the first relay on our Raspberry Pi, and use software to activate the vend relay.</p>
+        
+        <p>The relays on the Kuman relay module are each marked with a NO (Normal Open), NC (Normal Closed) and COM (Common) label. The relay COM connects to Pin 1 (VAC HOT), relay NC connects to
+           Pin 7 (VEND RELAY-NORMALLY CLOSE(HOT)), and relay NO connects to Pin 3 (VEND RELAY-NORMALLY OPEN). We wired the coin bypass to the first relay on our relay module. We used 
+           black wire for COM, white for NO, and yellow for NC.</p>
+           <img src="img/bypass.jpg" width="350" height="350">
+           <img src="img/bypass-test.jpg" width="350" height="350">
+
+        <p>To test the bypass we wired up our Raspberry Pi to the Kuman Relay Module. This requires providing 5V power to the relay board by connecting Pi pin 2 to relay module pin VCC,
+            and ground by connecting Pi pin 39 to relay module pin GND. We then connected Pi pin 11 (GPIO 17) to relay module IN1, which corresponds to the relay we have wired for the coin
+           bypass.</p>
+     
+        <p> Connecting a keyboard, monitor, and mouse to our Pi, we plug the Pi into the power receptacle, and then plugged in the fridge. Note that our Pi was previously booted and updated
+            following the instructions that came with the Pi. Open a command prompt and execute the commands below.  When you enter the third command (echo "out") you should test that
+            the vend relay is not activated already by pressing any of the vending selector switches. If a pop dispenses, the NC and NO are reversed. If nothing happens, proceed with
+            the remaining commands. You should hear the relay activate when you set the value to 1, and deactivate when you set it to 0. You can now press a selector switch and pop should
+            dispense. Congrats you have bypassed the coin credit system.</p>
+        
+        <h5>Command Prompt:</h5>
+
+        <pre><code class="cmd">sudo -i
+echo "17" > /sys/class/gpio/export
+echo "out" > /sys/class/gpio/gpio17/direction
+echo "1" > /sys/class/gpio/gpio17/value
+echo "0" > /sys/class/gpio/gpio17/value
+echo "17" > /sys/class/gpio/unexport</code></pre>
+        
+        <p>Note that this can take a bit of trial and error, and some of the GPIO pins on the Pi are active "high", and some "low". Likewise, the relay module itself my be active hi or active low.
+           All this really means, if you consider a light switch, is whether it is in the up or down position by default. For purposes of our hack we selected pins that were active hi and
+           mapped our NC and NO connections accordingly, so if you follow suit and have the same relay module you should be fine. Worse case scenario is a bit of rewiring. We read a lot of
+           information on the web about how to fix this with invertors, pull-up resistor, etc. Just reverse NO and NC and move on - it's not worth it.
         </p>
-    </footer>
 
-  </body>
+        <h3 id="hack-selector-switch">Selector Switches</h3>
+        <p>Prepare for a lot of wiring at this point. On our machine we have 5 selector switches. If you look closely, the switch itself is also labelled with our familiar NO (NORM OPEN),
+           NC (NORM CLOSED), and COM (COMMON). We were fortunate to have a nice little spot above the coin mechanism to place our relay and Pi. We lined this with and antistatic mat which
+           also serves to protect the back of the relay circuit board from comming into contact with the metal chasis. We created 5 bundles of 36" lengths of wire, with red, yellow, and
+           white wire in each. These were tied together every 6" with electrical tape to keep each bundle separate from the others. We used white for COM, red for NO, and yelllow for NC.
+           Note that this color mapping differs from that used for the coin bypass (basically we ran out of black wire).
+        </p>
+        <div class="row">
+            <div class="column">
+                <img src="img/selector.jpg" width="350" height="215">
+                <img src="img/relay-full.jpg" width="350" height="215">
+            </div>
+            <div class="column" >
+                <img src="img/xander.jpg" width="350" height="450" >
+            </div>
+        </div>
+        <p>Xander then set to work on creating the "splicers" for the selector switches themselves. Each splicer contains a male connector and female connector joined into a 3-Way Hilitand
+           connector. For each switch there are three splicers - one red, one white, one yellow. The 36" wire bundles were routed from the Kuman Relay Module down the existing wiring harness
+           and into the selector switch area. Zip ties keep everything neat and tidy. A yellow splicer is shown below.</p>
+           <img src="img/splicer.jpg" width="200" height="400"> 
+           <img src="img/wire-route.jpg" width="250" height="400"> 
+           <img src="img/wire-pull.jpg" width="250" height="400"> 
+
+        <p>For each three wire bundle, connect the appropriate wire colors to the corresponding splicer colors. Starting with the top switch, pry off the female connector on the COMMON switch pole and
+           plug it into the white male splicer connector, and then connect the white female splicer back to the COMMON switch pole. Next pry off the NORM CLOSED female connector from the switch
+           pole, and connect it to the yellow male splicer, and connect the yellow female splicer back to the NORM CLOSED switch pole. Finally, pry off the NORM OPEN female connector from the 
+           switch pole, connect it to the male red splicer, and connect the female red splicer back to the NORM OPEN switch poll. Repeat for all switches. If you lose track of which wire bundle
+           connects to which relay you can use a multi-meter to figure this out. The switches are numbered in the circuit diagram, and we made certain to connect the relay module in the same
+           order to make programming easier. So relay module 2 goes to switch 1, module 3 to switch 2, and so on, since we elected to use relay module 1 for the coin bypass.
+        </p>
+        <img src="img/switch-poles.jpg" width="350" height="400"> 
+        <img src="img/switch-spliced.jpg" width="350" height="400"> 
+
+        <p>You can continue to use the previous command line instructions to test each selector switch by first activating the coin bypass (GPIO 17), and then repeating the same commands
+           for the GPIO tied to your relay (replacing the GPIO number accordingly in each command). We mapped the relays as follows:</p>
+        <p>Pin 11 (GPIO 17) to Relay IN1 (for Vendo coin activation)</p>
+        <p>Pin 13 (GPIO 27) to Relay IN2 (for beverage 1 selection)</p>
+        <p>Pin 15 (GPIO 22) to Relay IN3 (for beverage 2 selection)</p>
+        <p>Pin 12 (GPIO 18) to Relay IN4 (for beverage 3 selection)</p>
+        <p>Pin 16 (GPIO 23) to Relay IN5 (for beverage 4 selection)</p>
+        <p>Pin 33 (GPIO 13) to Relay IN6 (for beverage 5 selection)</p>
+
+
+        <h3 id="hack-hardware-done">Hardware Ready</h3>
+        <p>After splicing our relays into all the selector switches, we gently pushed all the wiring into the space remaining around the selector switches, and verified all the manual buttons
+           could still be pressed without interference from the additional wiring. We closed the coin mechanism over the selectors. Below is the finished result.
+        </p>
+        <img src="img/hardware-done.jpg"> 
+
+
+     <h2>Software</h2>
+     <h3 id="hack-software-github">GitHub Project</h3>
+
+        <p>The software is fully contained in the github project associated with this page. In addition to the software, instructions for wiring up Twilio are included, but for the Alexa skill
+           you will be on your own. The skill handler is included in the software, but the creation of the skill itself will need to be completed by yourself. Tutorials abound on the internet.
+        </p>
+
+    <h3 id="hack-software-github">Improvements</h3>
+    <p>The following software additions have been considered:</p>
+    <p>1. Tracking beverage usage by phone number - useful for billing</p>
+    <p>2. Tracking inventory - SMS to owner when supplies are low.</p>
+    <p>3. Paid SMS - receive payments from phone company for SMS users via a per charge SMS number</p>
+    <p>4. Alexa facts - state useful facts for the beverage dispensed</p>
+    <p>5. Alexa integration - add the full Alexa client into the Pi, and add microphone and speaker, to remove need for external Alexa speaker.</p>
+
+
+    <h2>Finished Hack</h2>
+    <video id="sampleMovie" src="img/alexa-beer.mp4" type="video/mp4s" width="750" height="900" controls> </video>
+
+</div>
+  </div>
+</body>
 </html>
